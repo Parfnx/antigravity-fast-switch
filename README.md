@@ -1,29 +1,29 @@
 # Antigravity Fast Switch
 
-Локальный патч `app.asar` для быстрого переключения Google-аккаунтов прямо из левого сайдбара Antigravity (кнопка `Fast switch` над `Settings` с адаптивным поповером под текущую тему).
+Local `app.asar` patch that adds a `Fast switch` button above `Settings` in the Antigravity sidebar for quick Google account switching.
 
-## Возможности
-- Сохраняет несколько учётных записей Google и отображает активную и сохранённые в поповере.
-- Хранит токены изолированно в Windows Credential Manager (`gemini:antigravity:fastswitch:*`).
-- При переключении подменяет активную запись (`gemini:antigravity`) и перезапускает `language_server` без полного перезапуска IDE.
-- Делает резервную копию `app.asar.fast-switch.backup` перед патчингом и проверяет SHA-256 целостность + `node --check`.
+## Features
+- Displays the active account and saved accounts in a theme-adaptive popover.
+- Stores credentials isolated in Windows Credential Manager (`gemini:antigravity:fastswitch:*`).
+- Switches the active credential (`gemini:antigravity`) and restarts `language_server` without a full IDE restart.
+- Automatically creates `app.asar.fast-switch.backup` before patching and verifies SHA-256 integrity + `node --check`.
 
-## Зависимости
+## Requirements
 - Windows 10/11
 - Python 3
-- Node.js (для проверки синтаксиса `node --check`)
+- Node.js (`node --check` during `app.asar` verification)
 
-## Установка
+## Install
 ```powershell
 git clone https://github.com/Parfnx/antigravity-fast-switch.git
 cd antigravity-fast-switch
-.\apply.ps1
+powershell -ExecutionPolicy Bypass -File .\apply.ps1
 ```
 
-## Откат
+## Rollback
 ```powershell
-.\unpatch.ps1
+powershell -ExecutionPolicy Bypass -File .\unpatch.ps1
 ```
 
-## Примечание
-После автообновления Antigravity `app.asar` перезаписывается — перед обновлением можно откатить патч, а после обновления снова запустить `.\apply.ps1`.
+## Note
+Antigravity auto-updates overwrite `app.asar`. Run `.\unpatch.ps1` before updating if needed, or re-run `.\apply.ps1` after an update.
